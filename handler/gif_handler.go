@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"athielen.com/line-ingress/pkg/backend"
-	"athielen.com/line-ingress/pkg/models"
 	"encoding/base64"
+	"line-ingress/backend"
+	"line-ingress/models"
 	"net/http"
 )
 
@@ -16,14 +16,14 @@ func (h *GifHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request
 	switch request.Method {
 	case "GET":
 		SendSuccessfulGifPixel(writer)
-		json, err:= models.MarshalRequestJSON(request)
+		json, err := models.MarshalRequestJSON(request)
 
 		if err == nil {
 			h.bman.SendLineToChannels(json)
 		}
 
 	default:
-		SendStatusNotfound(writer,"Can't find method requested")
+		SendStatusNotfound(writer, "Can't find method requested")
 	}
 
 }

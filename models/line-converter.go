@@ -15,18 +15,18 @@ func MarshalRequestJSON(request *http.Request) ([]byte, error) {
 
 	return json.Marshal(
 		WebEventFeatures{
-			Method: request.Method,
-			URL: request.URL,
-			Host: request.Host,
-			Form: request.Form,
-			RemoteAddr: request.RemoteAddr,
-			RequestURI: request.RequestURI,
-			QueryParams: queryParams,
-			Origin: request.Header.Get("Origin"),
-			Browser: request.UserAgent(),
+			Method:          request.Method,
+			URL:             request.URL,
+			Host:            request.Host,
+			Form:            request.Form,
+			RemoteAddr:      request.RemoteAddr,
+			RequestURI:      request.RequestURI,
+			QueryParams:     queryParams,
+			Origin:          request.Header.Get("Origin"),
+			Browser:         request.UserAgent(),
 			OperatingSystem: "",
-			DeviceType: "",
-			VisitorCountry: "840",
+			DeviceType:      "",
+			VisitorCountry:  "840",
 			InitialReferrer: request.Referer(),
 		})
 }

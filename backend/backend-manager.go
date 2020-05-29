@@ -1,21 +1,27 @@
 package backend
 
 import (
-	"athielen.com/line-ingress/pkg/models"
+	"line-ingress/models"
 	"time"
 )
 
 type BackendManager struct {
 	File FileBackend
+	Redis RedisBackend
 }
 
 func BuildBackendManager() BackendManager {
 	fb := FileBackend{make(chan models.Line)}
-	return BackendManager{fb}
+
+	rc := RClient()
+	rb := RedisBackend{rc,make(chan models.Line)}
+
+	return BackendManager{fb, rb}
 }
 
 func (bman BackendManager) StartBackends() {
 	go bman.File.Consume()
+	go bman.Redis.Consume()
 }
 
 func (bman BackendManager) SendLineToChannels(b []byte) {
@@ -25,4 +31,5 @@ func (bman BackendManager) SendLineToChannels(b []byte) {
 
 	// pass line model to applicable channels
 	bman.File.Lines <- line
+	bman.Redis.Lines <- line
 }

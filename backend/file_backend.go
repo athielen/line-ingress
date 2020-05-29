@@ -2,7 +2,9 @@ package backend
 
 import (
 	"fmt"
-	"athielen.com/line-ingress/pkg/models"
+	"line-ingress/models"
+	"log"
+	"os"
 )
 
 type FileBackend struct {
@@ -10,10 +12,22 @@ type FileBackend struct {
 }
 
 func (backend *FileBackend) Consume() {
+
 	fmt.Println("Register the worker")
-	for i := range backend.Lines {
-		fmt.Println(i)
+
+	f, err := os.OpenFile("testfile", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	for i := range backend.Lines {
+		fmt.Println("file..." + i.String() + "\n")
+		f.WriteString(i.String() + "\n")
+	}
+
+	f.Close()
+
 }
 
 func (backend *FileBackend) Input() chan<- models.Line {

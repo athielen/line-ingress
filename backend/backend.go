@@ -1,6 +1,6 @@
 package backend
 
-import "athielen.com/line-ingress/pkg/models"
+import "line-ingress/models"
 
 // Backend consumes Line values and persists them to some kind of storage.
 type Backend interface {
@@ -13,5 +13,4 @@ type Backend interface {
 
 	// Output returns the channel on which the backend processes Line values
 	Output() <-chan models.Line
-
 }

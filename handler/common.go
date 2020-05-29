@@ -21,7 +21,7 @@ func SendSuccessUp(writer http.ResponseWriter) {
 }
 
 // Send generic success with 404
-func SendStatusNotfound(writer http.ResponseWriter,message string) {
+func SendStatusNotfound(writer http.ResponseWriter, message string) {
 	writer.WriteHeader(http.StatusNotFound)
 	writer.Write([]byte(fmt.Sprintf(`{"message": "%s"}`, message)))
 }

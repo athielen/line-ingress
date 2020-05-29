@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"athielen.com/line-ingress/pkg/backend"
+	"line-ingress/backend"
 	"net/http"
 )
 

@@ -9,15 +9,8 @@ import (
 // Line corresponds to an incoming tracking request and contains the data
 // to be persisted.
 type Line struct {
-	// Values are the query parameters encoded in JSON.
 	Payload []byte
-
-	// Time is the flavor-aware time the request was received.
 	Time time.Time
-
-	// Flavor specifies the instance to which the request corresponds to
-	// (e.g. scrooge.co.uk).
-	//Flavor *Flavor   <- replace with API KEY
 	SourceType string
 }
 

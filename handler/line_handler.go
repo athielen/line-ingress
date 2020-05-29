@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"athielen.com/line-ingress/pkg/backend"
-	"athielen.com/line-ingress/pkg/models"
+	"line-ingress/backend"
+	"line-ingress/models"
 	"net/http"
 )
 
@@ -22,6 +22,6 @@ func (h *LineHandler) ServeHTTP(writer http.ResponseWriter, request *http.Reques
 		SendGenericSuccess(writer)
 
 	default:
-		SendStatusNotfound(writer,"Can't find method requested")
+		SendStatusNotfound(writer, "Can't find method requested")
 	}
 }

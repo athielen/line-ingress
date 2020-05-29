@@ -1,4 +1,4 @@
-package line_ingress
+package main
 
 import (
 	"line-ingress/backend"

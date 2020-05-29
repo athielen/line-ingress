@@ -1,8 +1,8 @@
-package main
+package line_ingress
 
 import (
-	"athielen.com/line-ingress/pkg/backend"
-	"athielen.com/line-ingress/pkg/handler"
+	"line-ingress/backend"
+	"line-ingress/handler"
 )
 
 func main() {

@@ -2,11 +2,14 @@ package backend
 
 import (
 	"context"
-	"fmt"
 	"github.com/go-redis/redis"
+	log "github.com/sirupsen/logrus"
+	"os"
 )
 
 func RClient() *redis.Client {
+	log.Debug("Initializing redis client...")
+
 	client := redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
 		Password: "", // no password set
@@ -22,11 +25,14 @@ func ping(client *redis.Client) error {
 
 	ctx := context.Background()
 	pong, err := client.Ping(ctx).Result()
+
 	if err != nil {
+		log.Fatal("Cannot connect to redis at " + client.Options().Addr + ". Gracefully shutting down...")
+		os.Exit(1)
 		return err
 	}
-	fmt.Println(pong, err)
-	// Output: PONG <nil>
+
+	log.Debug("Successfully recieved PONG from redis server at" + client.Options().Addr + ":" + pong);
 
 	return nil
 }

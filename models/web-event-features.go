@@ -8,6 +8,7 @@ type WebEventFeatures struct {
 	Host            string
 	Form            url.Values
 	RemoteAddr      string
+	IpAddress		string
 	RequestURI      string
 	QueryParams     url.Values
 	Origin          string

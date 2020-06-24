@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-redis/redis"
+	log "github.com/sirupsen/logrus"
 	"line-ingress/models"
 )
 
@@ -13,13 +14,11 @@ type RedisBackend struct {
 }
 
 func (rb *RedisBackend) Consume() {
-	fmt.Println("Register the worker")
+	log.Debug("Register the worker for redis backend channel")
 	for i := range rb.Lines {
-		fmt.Println("redis..." + i.String() + "\n")
-
 		ctx := context.Background()
 
-		rb.Client.Set(ctx,"key-02", i.String(), 0).Result()
+		rb.Client.Set(ctx,"key-02", i.JSON, 0).Result()
 
 		val2 := rb.Client.Get(ctx, "key-02")
 

@@ -1,9 +1,8 @@
 package backend
 
 import (
-	"fmt"
+	log "github.com/sirupsen/logrus"
 	"line-ingress/models"
-	"log"
 	"os"
 )
 
@@ -12,8 +11,7 @@ type FileBackend struct {
 }
 
 func (backend *FileBackend) Consume() {
-
-	fmt.Println("Register the worker")
+	log.Debug("Register the worker for file backend channel")
 
 	f, err := os.OpenFile("testfile", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
@@ -22,10 +20,8 @@ func (backend *FileBackend) Consume() {
 	}
 
 	for i := range backend.Lines {
-		fmt.Println("file..." + i.String() + "\n")
 		f.WriteString(i.String() + "\n")
 	}
-
 	f.Close()
 
 }

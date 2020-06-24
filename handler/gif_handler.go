@@ -17,15 +17,12 @@ func (h *GifHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request
 	case "GET":
 		SendSuccessfulGifPixel(writer)
 		json, err := models.MarshalRequestJSON(request)
-
 		if err == nil {
 			h.bman.SendLineToChannels(json)
 		}
-
 	default:
 		SendStatusNotfound(writer, "Can't find method requested")
 	}
-
 }
 
 func SendSuccessfulGifPixel(writer http.ResponseWriter) {
